@@ -10,14 +10,10 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAuth.instance.signInAnonymously();
   runApp(const MyApp());
-
-
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +44,9 @@ class _MyHomePageState extends State<MyHomePage>
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = TabController(length: 2, vsync: this, animationDuration: Duration.zero);
+    _tabController =
+        TabController(length: 2, vsync: this, animationDuration: Duration.zero);
   }
-
-
 
   @override
   void dispose() {
@@ -105,11 +100,11 @@ class _MyHomePageState extends State<MyHomePage>
                     color: Color(0xffFB90A2),
                     size: 20,
                   ),
-                  onPressed: () {FirebaseFirestore.instance.collection('UserList').add(
-                    {
-                      'name': DateTime.now().millisecondsSinceEpoch
-                    },
-                  );},
+                  onPressed: () {
+                    FirebaseFirestore.instance.collection('UserList').add(
+                      {'name': DateTime.now().millisecondsSinceEpoch},
+                    );
+                  },
                 ),
               ),
             ],
@@ -127,7 +122,12 @@ class _MyHomePageState extends State<MyHomePage>
         ),
         body: TabBarView(
           controller: _tabController,
-          children: const <Widget>[UserScreen(), Center(child: Text("2"),)],
+          children: const <Widget>[
+            UserScreen(),
+            Center(
+              child: Text("2"),
+            )
+          ],
         ),
         bottomNavigationBar: Container(
           color: const Color(0xff4A5B6F),
@@ -158,7 +158,6 @@ class _MyHomePageState extends State<MyHomePage>
             ],
             controller: _tabController,
           ),
-        )
-        );
+        ));
   }
 }
