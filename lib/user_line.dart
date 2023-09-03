@@ -24,14 +24,25 @@ class UserLine extends StatelessWidget {
               CircleAvatar(
                 backgroundImage: NetworkImage(url),
               ),
+              const SizedBox(
+                width: 10.0,
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    children: [Text(name), Text('D-4')],
+                    children: [
+                      Text(
+                        name,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    ],
                   ),
-                  Text(abra)
+                  Text(
+                    abra,
+                    style: const TextStyle(color: Color(0xff737B7E)),
+                  )
                 ],
               )
             ],
@@ -41,13 +52,13 @@ class UserLine extends StatelessWidget {
             children: [
               const Icon(
                 Icons.favorite_rounded,
-                size: 36.7,
-                color: Color(0xffD488B7),
+                size: 35.0,
+                color: Color(0xffF1B7D0),
               ),
               const Icon(
-                Icons.favorite_rounded,
-                size: 35.0,
-                color: Color(0xffF0A5CC),
+                Icons.favorite_border_rounded,
+                size: 38.0,
+                color: Color(0xffD488B7),
               ),
               Stack(
                 children: [
