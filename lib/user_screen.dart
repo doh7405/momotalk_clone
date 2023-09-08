@@ -7,9 +7,7 @@ class UserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        //appBar: AppBar(backgroundColor: Colors.amber,),
-        body: StreamBuilder(
+    return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('UserList2/ZjhaUecOEjMeuyqHjtdE/user')
           .snapshots(),
@@ -24,13 +22,22 @@ class UserScreen extends StatelessWidget {
         return ListView.builder(
             itemCount: docs.length,
             itemBuilder: (context, index) {
-              return UserLine(
-                  abra: docs[index]['abracadabra'],
-                  like: docs[index]['like'],
-                  name: docs[index]['name'],
-                  url: docs[index]['url']);
+              return Column(
+                children: [
+                  UserLine(
+                      abra: docs[index]['abracadabra'],
+                      like: docs[index]['like'],
+                      name: docs[index]['name'],
+                      url: docs[index]['url']),
+                  const Divider(
+                    color: Color(0xffE4EAEA),
+                    indent: 10.0,
+                    endIndent: 10.0,
+                  )
+                ],
+              );
             });
       },
-    ));
+    );
   }
 }

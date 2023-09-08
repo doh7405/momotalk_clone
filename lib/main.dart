@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:momo_talk/birth_screen.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'user_screen.dart';
+//import 'user_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -123,9 +124,9 @@ class _MyHomePageState extends State<MyHomePage>
         body: TabBarView(
           controller: _tabController,
           children: const <Widget>[
-            UserScreen(),
+            BirthScreen(),
             Center(
-              child: Text("2"),
+              child: Text('2'),
             )
           ],
         ),

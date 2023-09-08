@@ -52,13 +52,8 @@ class UserLine extends StatelessWidget {
             children: [
               const Icon(
                 Icons.favorite_rounded,
-                size: 35.0,
-                color: Color(0xffF1B7D0),
-              ),
-              const Icon(
-                Icons.favorite_border_rounded,
                 size: 38.0,
-                color: Color(0xffD488B7),
+                color: Color(0xffF1B7D0),
               ),
               Stack(
                 children: [
