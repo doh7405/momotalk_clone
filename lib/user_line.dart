@@ -8,14 +8,15 @@ class UserLine extends StatelessWidget {
       required this.name,
       required this.url});
   final String abra;
-  final int like;
+  final String like;
   final String name;
   final String url;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(8),
+      color: const Color(0xffF3F7F8),
+      padding: const EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -58,7 +59,7 @@ class UserLine extends StatelessWidget {
               Stack(
                 children: [
                   Text(
-                    like.toString(),
+                    like,
                     style: TextStyle(
                         fontSize: 15.0,
                         foreground: Paint()
@@ -68,7 +69,7 @@ class UserLine extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    like.toString(),
+                    like,
                     style: const TextStyle(
                         fontSize: 15.0, fontWeight: FontWeight.bold),
                   )
