@@ -61,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: 50.0,
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           leading: Row(
             children: [
