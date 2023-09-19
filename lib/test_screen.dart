@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:momo_talk/user_line.dart';
+import 'package:momo_talk/option_dialog.dart';
 
 class TestScreen extends StatefulWidget {
   const TestScreen({super.key});
@@ -212,80 +213,13 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  // 77이다 50 + 74
+
   Future<void> _showMyDialog() async {
     return showDialog<void>(
         barrierColor: Colors.transparent,
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            elevation: 0.0,
-            insetPadding: EdgeInsets.only(
-                top: 101.0,
-                bottom: MediaQuery.of(context).size.height / 1.8,
-                right: 10.0,
-                left: 10.0),
-            contentPadding: const EdgeInsets.all(0.0),
-            content: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.shade300,
-                          blurRadius: 0.5,
-                          spreadRadius: 0.5,
-                          offset: const Offset(0, 1.5))
-                    ]),
-                child: Column(children: [
-                  const SizedBox(
-                      height: 50,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [Text("정렬"), Icon(Icons.close)],
-                          ),
-                          Divider(
-                            color: Color(0xffE4EAEA),
-                            height: 1.0,
-                          )
-                        ],
-                      )),
-                  Expanded(
-                      child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(onPressed: () {}, child: const Text("이름")),
-                          TextButton(onPressed: () {}, child: const Text("학원"))
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                              onPressed: () {}, child: const Text("인연랭크")),
-                          TextButton(onPressed: () {}, child: const Text("셀렉트"))
-                        ],
-                      )
-                    ],
-                  )),
-                  SizedBox(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Divider(
-                        color: Color(0xffE4EAEA),
-                        height: 1.0,
-                      ),
-                      TextButton(onPressed: () {}, child: const Text("확인")),
-                    ],
-                  ))
-                ])),
-          );
+          return const OptionDialog();
         });
   }
 }
