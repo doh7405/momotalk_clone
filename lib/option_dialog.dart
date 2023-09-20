@@ -27,84 +27,120 @@ class _OptionDialogState extends State<OptionDialog> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                    color: Colors.grey.shade300,
-                    blurRadius: 0.5,
+                    color: Colors.grey.shade500,
+                    blurRadius: 2.0,
                     spreadRadius: 0.5,
                     offset: const Offset(0, 1.5))
               ]),
-          child: Column(children: [
-            const SizedBox(
-                height: 50,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text("정렬"), Icon(Icons.close)],
-                    ),
-                    Divider(
-                      color: Color(0xffE4EAEA),
-                      height: 1.0,
-                    )
-                  ],
-                )),
-            Expanded(
-                child: Column(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _makeButton("이름", 0),
-                    _makeButton("학원", 1),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _makeButton("인연랭크", 2),
-                    _makeButton("셀렉트", 3),
-                  ],
-                )
-              ],
-            )),
-            SizedBox(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Divider(
-                  color: Color(0xffE4EAEA),
-                  height: 1.0,
+                SizedBox(
+                    height: 50,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(left: 10.0),
+                              child: Text(
+                                "정렬",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Color(0xff2B4463),
+                                ))
+                          ],
+                        ),
+                        const Divider(
+                          color: Color(0xffE4EAEA),
+                          height: 1.0,
+                        )
+                      ],
+                    )),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _makeButton("이름", 0),
+                          const SizedBox(
+                            width: 5.0,
+                          ),
+                          _makeButton("학원", 1),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _makeButton("인연랭크", 2),
+                          const SizedBox(
+                            width: 5.0,
+                          ),
+                          _makeButton("셀렉트", 3),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
-                    height: 30,
-                    width: MediaQuery.of(context).size.width - 70,
-                    child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Color(0xffE0E0DE)),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(3),
-                          ),
+                    height: 57.0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Divider(
+                          color: Color(0xffE4EAEA),
+                          height: 1.0,
                         ),
-                        child: const Center(
-                            child: Text(
-                          "확인",
-                          style: TextStyle(
-                              color: Color(0xff46617E),
-                              fontWeight: FontWeight.bold),
-                        )))),
-              ],
-            ))
-          ])),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+                          child: SizedBox(
+                              height: 37,
+                              width:
+                                  MediaQuery.of(context).size.width / 1.15 + 5,
+                              child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(
+                                        color: Color(0xffE0E0DE)),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(3),
+                                    ),
+                                  ),
+                                  child: const Center(
+                                      child: Text(
+                                    "확인",
+                                    style: TextStyle(
+                                        color: Color(0xff46617E),
+                                        fontWeight: FontWeight.bold),
+                                  )))),
+                        ),
+                      ],
+                    ))
+              ])),
     );
   }
 
   Widget _makeButton(String text, int idx) {
     return SizedBox(
-        height: 30,
-        width: 120,
+        height: 40,
+        width: MediaQuery.of(context).size.width / 2.3,
         child: OutlinedButton(
             onPressed: () {
               setState(() {
