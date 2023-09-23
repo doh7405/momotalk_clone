@@ -11,11 +11,12 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
-  bool orderName = false;
+  String orderName = "name";
+  //List<String> option = ["name", "학원", "like", "셀렉트"];
 
-  void changeState() {
+  void changeState(String selectedOption) {
     setState(() {
-      orderName = true;
+      orderName = selectedOption;
     });
   }
 
@@ -37,8 +38,8 @@ class _TestScreenState extends State<TestScreen> {
         return StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('UserList2/ZjhaUecOEjMeuyqHjtdE/user')
-              .orderBy('like', descending: false)
-              .orderBy('name', descending: orderName)
+              .orderBy(orderName, descending: false)
+              //.orderBy('name', descending: true) // 'name'을 바꿔야 함
               .snapshots(),
           builder: (BuildContext context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -219,7 +220,7 @@ class _TestScreenState extends State<TestScreen> {
         barrierColor: Colors.transparent,
         context: context,
         builder: (BuildContext context) {
-          return const OptionDialog();
+          return OptionDialog(changeState: changeState,);
         });
   }
 }

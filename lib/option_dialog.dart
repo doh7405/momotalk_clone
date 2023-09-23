@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class OptionDialog extends StatefulWidget {
-  const OptionDialog({super.key});
+  const OptionDialog({super.key, required this.changeState});
+  final Function changeState;
 
   @override
   State<OptionDialog> createState() => _OptionDialogState();
@@ -9,6 +10,7 @@ class OptionDialog extends StatefulWidget {
 
 class _OptionDialogState extends State<OptionDialog> {
   List<bool> selectColor = [false, false, false, false];
+  String selectedOption = "name";
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +116,7 @@ class _OptionDialogState extends State<OptionDialog> {
                                   MediaQuery.of(context).size.width / 1.15 + 5,
                               child: OutlinedButton(
                                   onPressed: () {
+                                    widget.changeState(selectedOption);
                                     Navigator.pop(context);
                                   },
                                   style: OutlinedButton.styleFrom(
@@ -143,6 +146,15 @@ class _OptionDialogState extends State<OptionDialog> {
         width: MediaQuery.of(context).size.width / 2.3,
         child: OutlinedButton(
             onPressed: () {
+              if (idx == 0) {
+                selectedOption = "name";
+              } else if (idx == 1) {
+                selectedOption = "academy";
+              } else if (idx == 2) {
+                selectedOption = "like";
+              } else {
+                selectedOption = "select";
+              }
               setState(() {
                 selectColor = [false, false, false, false];
                 selectColor[idx] = true;
