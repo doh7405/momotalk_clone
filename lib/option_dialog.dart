@@ -11,6 +11,7 @@ class OptionDialog extends StatefulWidget {
 class _OptionDialogState extends State<OptionDialog> {
   List<bool> selectColor = [false, false, false, false];
   String selectedOption = "name";
+  String selectedCondition = "이름";
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +117,8 @@ class _OptionDialogState extends State<OptionDialog> {
                                   MediaQuery.of(context).size.width / 1.15 + 5,
                               child: OutlinedButton(
                                   onPressed: () {
-                                    widget.changeState(selectedOption);
+                                    widget.changeState(
+                                        selectedOption, selectedCondition);
                                     Navigator.pop(context);
                                   },
                                   style: OutlinedButton.styleFrom(
@@ -148,12 +150,16 @@ class _OptionDialogState extends State<OptionDialog> {
             onPressed: () {
               if (idx == 0) {
                 selectedOption = "name";
+                selectedCondition = "이름";
               } else if (idx == 1) {
                 selectedOption = "academy";
+                selectedCondition = "학원";
               } else if (idx == 2) {
                 selectedOption = "like";
+                selectedCondition = "인연랭크";
               } else {
                 selectedOption = "select";
+                selectedCondition = "셀렉트";
               }
               setState(() {
                 selectColor = [false, false, false, false];

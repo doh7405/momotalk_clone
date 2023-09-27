@@ -12,11 +12,13 @@ class TestScreen extends StatefulWidget {
 
 class _TestScreenState extends State<TestScreen> {
   String orderName = "name";
-  //List<String> option = ["name", "학원", "like", "셀렉트"];
+  String orderCondition = "이름";
+  bool isDesc = true;
 
-  void changeState(String selectedOption) {
+  void changeState(String selectedOption, String selectedCondition) {
     setState(() {
       orderName = selectedOption;
+      orderCondition = selectedCondition;
     });
   }
 
@@ -38,8 +40,7 @@ class _TestScreenState extends State<TestScreen> {
         return StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('UserList2/ZjhaUecOEjMeuyqHjtdE/user')
-              .orderBy(orderName, descending: false)
-              //.orderBy('name', descending: true) // 'name'을 바꿔야 함
+              .orderBy(orderName, descending: isDesc)
               .snapshots(),
           builder: (BuildContext context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -147,55 +148,100 @@ class _TestScreenState extends State<TestScreen> {
                               style: const TextStyle(
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.bold))),
-                      InkWell(
-                        onTap: () {
-                          _showMyDialog();
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(10.0),
-                          transform: Matrix4.skewX(-.15),
-                          width: 90,
-                          height: 30,
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.shade300,
-                                    blurRadius: 0.5,
-                                    spreadRadius: 0.5,
-                                    offset: const Offset(-1, 1.3))
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(4.0)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              const Text("이름"),
-                              Column(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 4.0, right: 4.0),
-                                    width: 10,
-                                    height: 10,
-                                    decoration: BoxDecoration(
-                                      gradient: const LinearGradient(
-                                          stops: [.5, .5],
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
-                                          colors: [
-                                            Colors.transparent,
-                                            Color(0xff496E8B)
-                                          ]),
-                                      borderRadius: BorderRadius.circular(1.5),
+                      SizedBox(
+                        width: 190,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                _showMyDialog();
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.all(4.0),
+                                transform: Matrix4.skewX(-.15),
+                                width: 90,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          blurRadius: 0.5,
+                                          spreadRadius: 0.5,
+                                          offset: const Offset(-1, 1.3))
+                                    ],
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(4.0)),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const SizedBox(
+                                      width: 10,
                                     ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
+                                    Text(orderCondition),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          margin: const EdgeInsets.only(
+                                              top: 4.0, right: 4.0),
+                                          width: 10,
+                                          height: 10,
+                                          decoration: BoxDecoration(
+                                            gradient: const LinearGradient(
+                                                stops: [.5, .5],
+                                                begin: Alignment.bottomLeft,
+                                                end: Alignment.topRight,
+                                                colors: [
+                                                  Colors.transparent,
+                                                  Color(0xff496E8B)
+                                                ]),
+                                            borderRadius:
+                                                BorderRadius.circular(1.5),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isDesc = !isDesc;
+                                });
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.all(4.0),
+                                transform: Matrix4.skewX(-.15),
+                                width: 70,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          blurRadius: 0.5,
+                                          spreadRadius: 0.5,
+                                          offset: const Offset(-1, 1.3))
+                                    ],
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(4.0)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.menu_outlined),
+                                    SizedBox(
+                                        width: 5,
+                                        child: Icon(
+                                            isDesc ? Icons.south : Icons.north,
+                                            size: 18,
+                                            color: const Color(0xff496C8C)))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -214,13 +260,14 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-
   Future<void> _showMyDialog() async {
     return showDialog<void>(
         barrierColor: Colors.transparent,
         context: context,
         builder: (BuildContext context) {
-          return OptionDialog(changeState: changeState,);
+          return OptionDialog(
+            changeState: changeState,
+          );
         });
   }
 }
