@@ -11,8 +11,8 @@ class ChatListScreen extends StatefulWidget {
 }
 
 class _ChatListScreen extends State<ChatListScreen> {
-  String orderName = "name";
-  String orderCondition = "이름";
+  String orderName = "chatTime";
+  String orderCondition = "최신";
   bool isDesc = true;
 
   void changeState(String selectedOption, String selectedCondition) {
@@ -27,6 +27,7 @@ class _ChatListScreen extends State<ChatListScreen> {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('UserList2/ZjhaUecOEjMeuyqHjtdE/user2')
+          .orderBy(orderName, descending: isDesc)
           .snapshots(),
       builder: (BuildContext context,
           AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -51,7 +52,8 @@ class _ChatListScreen extends State<ChatListScreen> {
               UserLineForChat(
                   lastMessage: docs2[i]['lastChat'],
                   name: docs2[i]['name'],
-                  url: docs2[i]['url']),
+                  url: docs2[i]['url'],
+                  isRead: docs2[i]['isRead']),
               if (i != docs2.length - 1)
                 const Divider(
                   color: Color(0xffE4EAEA),
@@ -63,7 +65,11 @@ class _ChatListScreen extends State<ChatListScreen> {
           ));
         }
 
-        int numberStudent = docs2.length;
+        // 안 읽은 메시지 개수 확인
+        int lenIsNotRead = 0;
+        for (int i = 0; i < docs2.length; i++) {
+          if (docs2[i]['isRead'] == false) lenIsNotRead++;
+        }
 
         return Column(
           children: [
@@ -75,7 +81,7 @@ class _ChatListScreen extends State<ChatListScreen> {
                 children: [
                   Container(
                       padding: const EdgeInsets.only(left: 9.0),
-                      child: Text("안 읽은 메시지($numberStudent)",
+                      child: Text("안 읽은 메시지($lenIsNotRead)",
                           style: const TextStyle(
                               fontSize: 15.0, fontWeight: FontWeight.bold))),
                   SizedBox(

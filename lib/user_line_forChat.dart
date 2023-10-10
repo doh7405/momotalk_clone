@@ -6,10 +6,12 @@ class UserLineForChat extends StatelessWidget {
     required this.name,
     required this.url,
     required this.lastMessage,
+    required this.isRead,
   });
   final String name;
   final String url;
   final String lastMessage;
+  final bool isRead;
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +46,26 @@ class UserLineForChat extends StatelessWidget {
                     style: const TextStyle(color: Color(0xff737B7E)),
                   )
                 ],
-              )
+              ),
             ],
           ),
+          if (isRead == false)
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Center(
+                  child: Container(
+                      width: 22,
+                      height: 22,
+                      decoration: BoxDecoration(
+                          color: const Color(0xffFC4519),
+                          borderRadius: BorderRadius.circular(4.0)),
+                      child: const Center(
+                          child: Text("1",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Colors.white))))),
+            )
         ],
       ),
     );
